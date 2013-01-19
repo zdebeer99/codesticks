@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>List2Code</title>
+
+</head>
+<script>
+function onParseSuccess(response) {
+	  $('xresult').value = response;
+	}
+
+	function doAdd() {
+	  server.Parse($('xdata').value, $('xtemplate').value, onParseSuccess);
+	}
+</script>
+<body>
+List 2 Code<br>
+<br>
+Comma delimited Data<br>
+<textarea id="xdata" cols="90" rows="20"></textarea><br>
+<br>
+Template<br>
+<textarea id="xtemplate" cols="90" rows="5" ></textarea>
+<br>
+<br>
+<input type="submit" value="Generate">Generate</input>
+<br>
+<br>
+<textarea id="xresult" rows="10" cols="90"></textarea>
+</body></html>

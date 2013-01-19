@@ -1,0 +1,36 @@
+{%extends "Layout.html"%}
+
+{%block head%}
+
+{%endblock%}
+
+{%block content%}
+
+
+<h2>List2code Documentation</h2>
+<p>List2code is a simple text generator that can be used to
+generate text from a comma delimited or tab delimited table.</p>
+<p>Simply copy and paste your data from Excel or note pad into the 'Data' field, create a template and click on generate.</p>
+<p>The template will repeat for each line in your table, and replace the place holders {0},{1},... with
+the value contained in that column position.</p>
+
+<h3>Data Syntax</h3>
+<p>Comma or Tab delimited.</p>
+<p><b>Escaping</b></p>
+<p>To escape a comma or a tab in a column wrap the text with double quotes.</p>
+<p>Ex: apple,"keep,in,one,placeholder",column3 result:<br/> 
+{0} = apple<br/>
+{1} = keep,in,one,placeholder<br/>
+{2} = column3<br/>
+
+<h3>Template Syntax</h3>
+<p><b>Escaping</b></p>
+<p>Escaping a template variable is done by adding the '@' character in front of column placeholder in the template.
+<p><b>Examples;</b></p>
+<p>Ex 1: "@{0}" result: "{0}" </p>
+<p>Ex 2: "Escape this @{0} but not this '{0}'" result: "Escape this {0} but not this 'value'" </p>
+<p>to add a @ character in your code, you will need to escape the escape char.</p>
+<p><b>Examples;</b></p>
+<p>Ex 1: "@@" result: "@"</p>
+<p>Ex 2: "someone@@mail.com" result: "someone@mail.com"</p>
+{%endblock%}

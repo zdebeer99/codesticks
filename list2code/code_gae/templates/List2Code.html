@@ -1,0 +1,166 @@
+{#
+*/@style http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/flick/jquery-ui.css"
+*/@style  href="/content/css/bootstrap.css" rel="stylesheet"
+*/script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"
+*/script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"
+*/script src="/content/js/bootstrap.min.js"
+#}
+{% extends "Layout.html" %}
+
+{% block head %}
+    <link href="/content/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.1.0/knockout-min.js"></script>
+    <script type="text/javascript" src="/content/js/simpletxt.js"></script>
+    <script type="text/javascript" src="/content/js/list2code.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <p>Use list2code to generate text from a comma separated list. <a href="#overview">Overview</a></p>
+    <div class="row">
+        <div class="span9">
+
+            <h3>Data</h3>
+
+            <div class="form-inline">
+                <label class="radio inline">
+                    <input id="xauto" disabled type="radio" name="listformat" value="auto"
+                           data-bind="checked: model.delimiter"
+                           title=""
+                            />Auto
+                </label>
+                <label class="radio inline">
+                    <input id="xcomma" type="radio" name="listformat" value="comma"
+                           data-bind="checked: model.delimiter"
+                           title="Data is comma delimited. .csv files, etc."/> Comma
+                </label>
+                <label class="radio inline">
+                    <input id="xtab" type="radio" name="listformat" value="tab"
+                           data-bind="checked: model.delimiter"
+                           title="Data is tab delimited, use when copying data from excel into data area."/> Tab
+                </label>
+            </div>
+            <div>
+                <textarea id="xdata" data-bind="value: model.data" rows="10" class="span9">string,Name
+
+                </textarea>
+
+                <div class="btn-group pull-right">
+                    <button data-bind="click:cleardata" class="btn btn-small"
+                            title="Clear data.">Clear
+                    </button>
+                    <button data-bind="click:keepdata" class="btn btn-small"
+                            title="Temporarily save your data.">Keep
+                    </button>
+                </div>
+            </div>
+
+            <h3>Template</h3>
+
+            <div>
+                <textarea id="xtemplate" data-bind="value: model.template" rows="7" class="span9">
+
+                </textarea>
+
+                <div class="btn-group pull-right">
+                    <button data-bind="click:cleartemplate" class="btn btn-small"
+                            title="Clear template.">Clear
+                    </button>
+                    <button data-bind="click:keeptemplate" class="btn btn-small"
+                            title="Temporarily save your template.">Keep
+                    </button>
+                </div>
+            </div>
+            <div>
+                <input id="xgenerate" data-bind="click:generate" class="btn btn-primary" type="button"
+                       value="Generate"/>
+            </div>
+
+            <h3>Result</h3>
+
+            <div>
+                <textarea id="xresult" data-bind="value:model.generated" rows="15" class="span9">
+
+                </textarea>
+            </div>
+
+            <p></p>
+
+            <div style="width: 650px;">
+                <a name="overview"></a>
+
+                <h3>List2code Overview</h3>
+
+                <p>List2code is a simple text generator that can be used to
+                    generate text from a comma delimited table or tab delimited table.</p>
+
+                <p>Simply copy and past your data from Excel or notepad into the 'Data' field, create a template and
+                    click on
+                    'Generate'.</p>
+
+                <p>The template will repeat for each row in your data table, and replace the place holders defined as
+                    '{0}','{1}',... with
+                    the value contained in that column position. The fisrt column will be called '{0}'.</p>
+
+                <p>For more help see the <a href="/docs.html">Docs</a> page.</p>
+            </div>
+        </div>
+
+        <div class="span3">
+            <ul class="nav nav-list">
+                <li class="nav-header">Data History</li>
+                <ul id="datahistory" class="nav nav-list" data-bind="foreach: model.contentHistory['data']">
+                    <li><a href="#" class="span2" data-bind="text:name, click:$root.setdata"></a>
+                    <a class="close btn-small pull-right" href="#" data-bind="click:$root.deleteitem">x</a>
+                    </li>
+                </ul>
+                <li class="nav-header">Template History</li>
+                <ul id="tmplhistory" class="nav nav-list" data-bind="foreach: model.contentHistory['template']">
+                    <li><a href="#" data-bind="text:name,click:$root.settemplate"></a></li>
+                </ul>
+                <li class="nav-header">Default Templates</li>
+                <ul id="defaulthistory" class="nav nav-list">
+                </ul>
+            </ul>
+            <div class="alert">
+                <strong>Note:</strong> Data and templates is only stored in memory for now, if you click on the browser refresh button,
+                items will be lost.
+            </div>
+            <div class="well">
+            	<div class="g-plusone" data-size="medium"></div>
+            	<div>
+                <span>Number of times code was generated with list2code:</span>
+                <h4 data-bind="text: model.counter" style="text-align: center"></h4>
+                </div>                
+                <ul  class="nav nav-list">
+                <li class="nav-header">Other Sites</li>              
+                <li><a href="http://www.tsqltidy.com/Default.aspx">TSql Tidy</a>
+                	<span>Format Sql Select queries in a easy readerble way.</span>
+                </li>
+                <li><a href="http://jsfiddle.net/">JSFiddle</a>
+                	<span>Test Javascripts online.</span>
+                </li>
+                <li><a href="http://www.colorhexa.com/">ColorHexa</a>
+                	<span>a free color tool providing information about any color.</span>
+                </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script id="initdata" type="text/plain">string,Surname
+int,Age</script>
+    <script id="inittemplate" type="text/plain">//Template Example of a csharp property.
+private {0} {1} { get; set; };
+
+</script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+{% endblock %}
+

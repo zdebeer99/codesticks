@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <meta name="google-site-verification" content="D56DgQ80WXkGtDJ2-N2dAvAKq78OYrwSEc-BdXv8hew" />
+    <title>{{Title}}</title>
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/flick/jquery-ui.css" rel="stylesheet"/>
+    <link href="/content/css/bootstrap.css" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="/content/js/bootstrap.min.js"></script>
+
+    {% block head %} {% endblock %}
+    
+    <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34858140-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+<div class="container">
+<div class="navbar navbar-static-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                <li><a class="brand" href="/">List2code</a></li>
+                <li {{menuactivedoc}}><a href="/docs.html">Docs</a></li>
+                {# //disabled for now. <li class="pull-right">{{currentuser}}</li>#}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+{%block content%}{%endblock%}
+
+</div>
+</body>
+</html>
